@@ -20,14 +20,14 @@ jobs:
     
     - name: Run npm ci
       run: npm ci
-      working-directory: {{ env.SolutionFolder }}
+      working-directory: ${{ env.SolutionFolder }}
     
     - name: Run npm i -g gulp
       run: npm i -g gulp
-      working-directory: {{ env.SolutionFolder }}
+      working-directory: ${{ env.SolutionFolder }}
     
     - name: Bundle and package
       run: |
         gulp bundle --ship
         gulp package-solution --ship
-      working-directory: {{ env.SolutionFolder }}
+      working-directory: ${{ env.SolutionFolder }}
