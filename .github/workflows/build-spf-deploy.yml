@@ -1,15 +1,13 @@
-name: SPFx WebPart with Microsoft 365 CLI
+name: Build and Deploy the SPFx WebPart with Microsoft 365 CLI
 
 on: [push]
 
 env:
-  SolutionArtifactName: spfxsolution
-  ArtifactLocation: /home/runner/work/deploy-spx-github-action/deploy-spx-github-action
   SolutionFolder: ./solution
   SolutionPackagePath: solution/sharepoint/solution/solution.sppkg
 
 jobs:
-  build:
+  buildAndDeploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -35,23 +33,6 @@ jobs:
         gulp package-solution --ship
       working-directory: ${{ env.SolutionFolder }}
 
-    - name: Saves SPFx solution for the next job
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.SolutionArtifactName }}
-        path: ${{ env.SolutionPackagePath }}
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Retrieve the SPFx solution for this job
-      uses: actions/download-artifact@v2
-      with:
-        name: ${{ env.SolutionArtifactName }}
-        path: ${{ env.SolutionFolder }}
-    
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2.0.0
       with:

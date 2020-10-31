@@ -1,4 +1,4 @@
-name: SPFx WebPart with Microsoft 365 CLI
+name: Build the SPFx WebPart
 
 on: [push]
 
