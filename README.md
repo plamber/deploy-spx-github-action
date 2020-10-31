@@ -1,6 +1,7 @@
 # Deploy SPFx WebPart using GitHub actions and Microsoft 365 CLI
 
-This repository shows how you can deploy an SPFx WebPart to a SharPoint Online site collection using GitHub actions and the [Microsoft 365 CLI](https://pnp.github.io/cli-microsoft365/).
+This repository shows how to deploy a SPFx WebPart to a SharePoint Online site collection using GitHub actions and the [Microsoft 365 CLI](https://pnp.github.io/cli-microsoft365/).
+In this example I wanted to cover the scenario where the solution is deployed on a dedicated [site collection app catalog](https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog).
 
 ## STEP 1 - Prepare the SharePoint project
 First of all I had to prepare my enviornment and create a simple SPFx WebPart. to do this I performed following activities.
@@ -26,12 +27,22 @@ This example will push the SPFx Webpart in this project to a SharePoint Online s
 - SharePoint Online Site Collection
 - Username and Password of a user with Site Collection Admin rights on that site
 
-## STEP 4 - Give the consent to the CLI for Microsoft 365
-The Microsoft 365 CLI will upload the SPFx package to the SharePoint Online site by using the user we will pick for the deployment. All operations will be executed without interactions in the GitHub action. 
+## STEP 4 - Grant consent to the CLI for Microsoft 365
+The CLI for Microsoft 365 will upload the SPFx package to the SharePoint Online site by using the user we will pick for the deployment. All operations will be executed without interactions in the GitHub action. 
 
 We have to ensure that the account has consented the CLI to perform actions on his behalf. The simplest way to accomplish this is by installing the CLI on a machine using [this article](https://pnp.github.io/cli-microsoft365/). Afterwards, perform a `m365 login` command and login using the account that will perform the upgrade operation. Once the login operation is successful, you can logout again using `m365 logout`.
 
-## STEP 5 - Prepare the GitHub action to bundle, package, and deploy the SPFx project
+## STEP 5 - Create an site collection app catalog for the site in question using the CLI for Microsoft 365
+We want to publish the solution to an individual site and not the tenant catalog. To do this, I am going to create an app catalog for the target site collection. We do this using the CLI for Microsoft 365.
+
+```bash
+$site = "putYourSharePointOnlineSiteURLHere"
+m365 login
+m365 spo site appcatalog add --url $site
+Write-output "App Catalog Created on " $site
+```
+
+## STEP 6 - Prepare the GitHub action to bundle, package, and deploy the SPFx project
 We will use [GitHub Actions](https://docs.github.com/en/free-pro-team@latest/actions) in this repository to bundle and package the SPFx project. For this step I created a sample action under `.github\workflows\build-spfx-deploy.yml` to perform this operation. It is always executed when you push changes to the repository.
 
 The action will use three secret parameters. In the GitHub repository I am going to add these secrets:

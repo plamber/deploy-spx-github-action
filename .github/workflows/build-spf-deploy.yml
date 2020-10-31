@@ -33,6 +33,8 @@ jobs:
         gulp package-solution --ship
       working-directory: ${{ env.SolutionFolder }}
 
+  build:
+    runs-on: ubuntu-latest
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2.0.0
       with:
@@ -46,3 +48,4 @@ jobs:
         APP_FILE_PATH: ${{ env.SolutionPackagePath }}
         SCOPE: sitecollection
         SITE_COLLECTION_URL: ${{ secrets.spourl }}
+        OVERWRITE: true
