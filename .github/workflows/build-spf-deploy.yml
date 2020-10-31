@@ -33,6 +33,11 @@ jobs:
         gulp package-solution --ship
       working-directory: ${{ env.SolutionFolder }}
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2.0.0
       with:
