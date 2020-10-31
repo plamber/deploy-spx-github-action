@@ -51,9 +51,6 @@ jobs:
       with:
         name: ${{ env.SolutionArtifactName }}
         path: ${{ env.SolutionFolder }}
-
-    - name: Display structure of downloaded files
-        run: ls -R
     
     - name: CLI for Microsoft 365 login
       uses: pnp/action-cli-login@v2.0.0
