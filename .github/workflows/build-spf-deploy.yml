@@ -4,7 +4,7 @@ on: [push]
 
 env:
   SolutionFolder: ./solution
-  SolutionPackagePath: solution/sharepoint/solution.sppkg
+  SolutionPackagePath: solution/sharepoint/solution/solution.sppkg
 
 jobs:
   build:
