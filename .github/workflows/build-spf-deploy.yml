@@ -4,7 +4,7 @@ on: [push]
 
 env:
   SolutionFolder: ./solution
-  SolutionPackage: solution/sharepoint/solution.sppkg
+  SolutionPackagePath: solution/sharepoint/solution.sppkg
 
 jobs:
   build:
@@ -40,9 +40,9 @@ jobs:
         ADMIN_PASSWORD:  ${{ secrets.password }}
     
     # Deploy package to tenant using action-cli-deploy
-    - name: Option 2 - Deploy app to a site collection
+    - name: Deploy app to a site collection
       uses: pnp/action-cli-deploy@v2.0.0
       with:
-        APP_FILE_PATH: sharepoint/solution/spfx-cli-microsoft365-action.sppkg
+        APP_FILE_PATH: ${{ env.SolutionPackagePath }}
         SCOPE: sitecollection
         SITE_COLLECTION_URL: ${{ secrets.spourl }}
