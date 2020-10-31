@@ -1,6 +1,6 @@
 # Deploy SPFx WebPart using GitHub actions and Microsoft 365 CLI
 
-This repository shows how to deploy a SPFx WebPart to a SharePoint Online site collection using GitHub actions and the [Microsoft 365 CLI](https://pnp.github.io/cli-microsoft365/).
+This repository shows how to deploy a SPFx WebPart to a SharePoint Online site collection using GitHub actions and the [CLI for Microsoft 365](https://pnp.github.io/cli-microsoft365/).
 In this example I wanted to cover the scenario where the solution is deployed on a dedicated [site collection app catalog](https://docs.microsoft.com/en-us/sharepoint/dev/general-development/site-collection-app-catalog).
 
 ## STEP 1 - Prepare the SharePoint project
